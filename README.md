@@ -2,7 +2,7 @@
 
 날씨 기반 제주도 관광 알고리즘
 
-[![Open in Streamlit](https://deltateam.streamlit.app/)](https://deltateam.streamlit.app/)
+[![Open website made by streamlit]](https://deltateam.streamlit.app/)
 
 ### How to run it on your own machine
 
