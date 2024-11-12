@@ -18,7 +18,7 @@ import matplotlib.ticker as ticker
 from datetime import datetime,timedelta
 from pytz import timezone
 
-tourist_spot = st.text_input("관광지 검색","우도")
+tourist_spot = st.text_input("관광지 검색","한라산")
 lat = 33.46423019
 lon = 126.935006
 address = "address"
@@ -58,7 +58,7 @@ def download_file(tm2,tm2_10):
 tm2 = str(int(datetime.now(timezone('Asia/Seoul')).strftime('%Y%m%d%H%M')) - 1)
 
 # 현재 시간에서 10분 전 시간 계산
-ten_minute_ago = datetime.now(timezone('Asia/Seoul')) - timedelta(minutes=10)
+ten_minute_ago = datetime.now(timezone('Asia/Seoul')) - timedelta(minutes=15)
 tm2_10 = ten_minute_ago.strftime('%Y%m%d%H%M')
 tm2_10 = str(int(round(float(tm2_10) * 0.1) * 10))
 #download
@@ -162,11 +162,6 @@ col1, col2, col3 = st.columns(3)
 col1.metric("Temperature", "70 °F", "1.2 °F")
 col2.metric("Wind", "9 mph", "-8%")
 col3.metric("Humidity", "86%", "4%")
-
-if lat is None and lon is None:
-  lat = 33.46423019
-  lon = 126.935006
-  address = "address"
 
 left, right = st.columns(2)
 left_r = left.button("정보 지도",type="primary", use_container_width=True)
