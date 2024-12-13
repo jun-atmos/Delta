@@ -15,7 +15,7 @@ def jeju_aws():
   return jeju_aws
 
 def preprocessing(n,tm2,jeju_aws):
-  filename = [f'/workspaces/Delta/weather_csv/wea_{tm2}.csv',f'/workspaces/Delta/weather_csv/cloud_{tm2}.csv',f'/workspaces/Delta/weather_csv/vi_{tm2}.csv']
+  filename = [f'weather_csv/wea_{tm2}.csv',f'weather_csv/cloud_{tm2}.csv',f'weather_csv/vi_{tm2}.csv']
   df_coloums=[
       ['TIME', 'STN_ID', 'WD1', 'WS1', 'WDS', 'WSS', 'WD10', 'WS10', 'TA','RE', 'RN-15m', 'RN-60m', 'RN-12H', 'RN-DAY', 'HM', 'PA', 'PS', 'TD'],
       ['TIME', 'STN_ID', 'LON', 'LAT', 'CH_LOW', 'CH_MID', 'CH_TOP', 'CA_TOP'],
