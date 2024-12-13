@@ -48,10 +48,6 @@ with col1:
     tourist_spot = st.text_input("관광지 검색","한라산")
     lat,lon,address = get_location_info(tourist_spot)
 
-with col2:
-    with st.expander("기상 특보",icon="🚨"):
-        st.image("https://static.streamlit.io/examples/dice.jpg")
-
 
 col3, col4 = st.columns([3, 2])
 
@@ -82,3 +78,23 @@ with col4:
     col8.metric(f"1분 강수량", "70 mm",border=True)
     col9.metric(f"15분 강수량", "9 mm",border=True)
     col10.metric(f"습도", "86%",border=True)
+
+col11, col12 = st.columns([2, 3])
+with col11:
+    st.header("기상 특보 🚨", divider="red")
+    st.image("https://static.streamlit.io/examples/dice.jpg")
+with col12:
+    tab1, tab2, tab3 = st.tabs(["초단기 예측 (30분)", "적외위성영상", "영상 사용 설명서"])
+    with tab1:
+        rain()
+        st.header("초단기 예측 (30분)")
+        html_path = "rain.html"
+        with open(html_path, "r", encoding="utf-8") as file:
+            html_content = file.read()
+        st.components.v1.html(html_content)
+    with tab2:
+        st.header("적외위성영상")
+        st.image("https://static.streamlit.io/examples/dog.jpg")
+    with tab3:
+        st.header("영상 사용 설명서")
+        st.image("https://static.streamlit.io/examples/owl.jpg")

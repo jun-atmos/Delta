@@ -2,4 +2,5 @@ streamlit
 pandas
 matplotlib
 geopy
-streamlit_keplergl
+moviepy
+pillow

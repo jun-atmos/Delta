@@ -11,6 +11,7 @@ import math
 import requests
 from IPython.display import display, clear_output
 import glob
+from PIL import Image
 
 def download_file_rain(file_url, save_path):
     with open(save_path, 'wb') as f:  # 저장할 파일을 바이너리 쓰기 모드로 열기
@@ -18,6 +19,10 @@ def download_file_rain(file_url, save_path):
         f.write(response.content)  # 응답의 내용을 파일에 쓰기
 
 def rain():
+    img_dir = './rain_img/'
+    csv_dir = './weather_csv/'
+    [os.remove(file) for file in glob.glob(os.path.join(csv_dir, '*'))]
+    [os.remove(file) for file in glob.glob(os.path.join(img_dir, '*'))]
     # 현재 시간에서 10분 전 시간 계산
     current_time = datetime.now(timezone('Asia/Seoul'))
     ten_minutes_ago = current_time - timedelta(minutes=10)
@@ -132,7 +137,7 @@ def rain():
         else:
             print(f"File not found after waiting: {save_file_path}")
     
-    img_dir = '/workspaces/Delta/rain_img/'
+    img_dir = './rain_img/'
     img_paths = sorted(glob.glob(os.path.join(img_dir, '*.jpg')), key=os.path.getmtime, reverse=True)[:5]
     #그림 목록을 list로 가져오기, 단 마지막 수정시간을 반환하고 수정시간을 기준으로 정렬. 가장 최근 파일이 먼저오게 정렬. 9개만.
 
@@ -156,11 +161,10 @@ def rain():
     #마지막에서 첫번째 이미지 순서로 에니메이션 나오게 하기, 0.5초 간격, 애니메이션 속도 최적화
 
     plt.tight_layout() #사진이 딱맞게 하기
-    gif_path = 'rain.gif'
-    ani.save(gif_path, writer='pillow', fps=2)
+    ani.save(filename="rain.html", writer="html")
+
 
     #애니메이션 밑에 나오는 마지막 이미지를 지우기
     clear_output(wait=True)  #출력된 것 초기화
     plt.close()
-    img_dir = '/workspaces/Delta/rain_img/'
-    [os.remove(file) for file in glob.glob(os.path.join(img_dir, '*'))]
+
