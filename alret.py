@@ -4,10 +4,13 @@ from io import BytesIO
 import matplotlib.pyplot as plt
 from datetime import datetime, timedelta
 from IPython.display import clear_output  # Jupyter Notebook 환경에서 출력 초기화
+import streamlit as st
 
 def alret():
     # 기본 URL 템플릿
-    base_url = "https://apihub.kma.go.kr/api/typ03/cgi/wrn/nph-wrn7?out=0&tmef=1&city=1&name=0&tm={date}&lon=126.5&lat=33.5&range=100&size=685&wrn=W,R,C,D,O,V,T,S,Y,H,&authKey=LcdJI2t7SuCHSSNrexrgGA"
+    api_key = st.secrets["api"]["key"]
+    print(api_key)
+    base_url = f"https://apihub.kma.go.kr/api/typ03/cgi/wrn/nph-wrn7?out=0&tmef=1&city=1&name=0&lon=126.5&lat=33.5&range=100&size=685&wrn=W,R,C,D,O,V,T,S,Y,H,&authKey={api_key}"
 
     # 현재 시간을 한국 표준시(KST)로 변환
     utc_time = datetime.utcnow()  # UTC 시간 가져오기

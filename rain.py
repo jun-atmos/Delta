@@ -11,6 +11,8 @@ import math
 import requests
 from IPython.display import clear_output
 import glob
+import streamlit as st
+
 
 def download_file_rain(file_url, save_path):
     with open(save_path, 'wb') as f:  # 저장할 파일을 바이너리 쓰기 모드로 열기
@@ -64,9 +66,10 @@ def rain(lat,lon):
 
             # 다시 문자열로 변환하여 파일명에 사용
             tm2_f = tm2_f_datetime.strftime('%Y%m%d%H%M')
-
+            api_key = st.secrets["api"]["key"]
+            print(api_key)
             # URL 설정
-            url = f"https://apihub.kma.go.kr/api/typ03/cgi/dfs/nph-qpf_ana_img?eva=1&tm={tm2_adjusted_str}&qpf=B&ef={minutes_ahead}&map=HB&grid=0.1&legend=1&size=6000&zoom_level=1000&zoom_x=3000&zoom_y=1000&x1=1000&y1=1000&authKey=829vQlOcRAuvb0JTnFQLrQ"
+            url = f"https://apihub.kma.go.kr/api/typ03/cgi/dfs/nph-qpf_ana_img?eva=1&tm={tm2_adjusted_str}&qpf=B&ef={minutes_ahead}&map=HB&grid=0.1&legend=1&size=6000&zoom_level=1000&zoom_x=3000&zoom_y=1000&x1=1000&y1=1000&authKey={api_key}"
             save_file_path = f'rain_img/output_file_{tm2_f}.jpg'
 
             # 파일 다운로드 함수 호출

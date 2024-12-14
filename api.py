@@ -1,15 +1,19 @@
 import requests
 import os
 import glob
+import streamlit as st
 
 def download_file(tm2):
     csv_dir = 'weather_csv/'
     print("removing file...")
     [os.remove(file) for file in glob.glob(os.path.join(csv_dir, '*'))]
+
+    api_key = st.secrets["api"]["key"]
+    print(api_key)
     # URL 및 파일 경로 설정
-    wea_url = f"https://apihub-pub.kma.go.kr/api/typ01/cgi-bin/url/nph-aws2_min?tm2={tm2}&stn=0&disp=1&help=1&authKey=zbvBntvMSSK7wZ7bzDkiLg"
-    cloud_url = f"https://apihub-pub.kma.go.kr/api/typ01/cgi-bin/url/nph-aws2_min_cloud?tm2={tm2}&stn=0&disp=1&help=1&authKey=zbvBntvMSSK7wZ7bzDkiLg"
-    vi_url = f"https://apihub-pub.kma.go.kr/api/typ01/cgi-bin/url/nph-aws2_min_vis?tm2={tm2}&stn=0&disp=1&help=1&authKey=zbvBntvMSSK7wZ7bzDkiLg"
+    wea_url = f"https://apihub-pub.kma.go.kr/api/typ01/cgi-bin/url/nph-aws2_min?tm2={tm2}&stn=0&disp=1&help=1&authKey={api_key}"
+    cloud_url = f"https://apihub-pub.kma.go.kr/api/typ01/cgi-bin/url/nph-aws2_min_cloud?tm2={tm2}&stn=0&disp=1&help=1&authKey={api_key}"
+    vi_url = f"https://apihub-pub.kma.go.kr/api/typ01/cgi-bin/url/nph-aws2_min_vis?tm2={tm2}&stn=0&disp=1&help=1&authKey={api_key}"
 
     wea_save_file_path = f'weather_csv/wea_{tm2}.csv'
     cloud_save_file_path = f'weather_csv/cloud_{tm2}.csv'
