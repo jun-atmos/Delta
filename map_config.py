@@ -1,76 +1,87 @@
-def map_config():
-    config = {"version":"v1",
-        "config":{"visState":{"filters":[],
-                            "layers":[{"id":"2ilyzs8",
-                                        "type":"point",
-                                        "config":{"dataId":"AWS&ASOS",          #지정한 name와 같아야.
-                                                    "columnMode":"points",
-                                                    "label":"point",
-                                                    "color":[255,203,153],
-                                                    "highlightColor":[252,242,26,255],
-                                                    "columns":{"lat":"Latitude","lng":"Longitude"},
-                                                    "isVisible":True,
-                                                    "visConfig":{"radius":27.9,
-                                                                "fixedRadius":False,
-                                                                "opacity":0.8,
-                                                                "outline":False,
-                                                                "thickness":2,
-                                                                "strokeColor":None,
-                                                                "colorRange":{"name":"Global Warming",
-                                                                            "type":"sequential",
-                                                                            "category":"Uber",
-                                                                            "colors":["#5A1846","#900C3F","#C70039","#E3611C","#F1920E","#FFC300"]},
-                                                                "strokeColorRange":{"name":"Global Warming",
-                                                                                    "type":"sequential",
-                                                                                    "category":"Uber",
-                                                                                    "colors":["#5A1846","#900C3F","#C70039","#E3611C","#F1920E","#FFC300"]},
-                                                                "radiusRange":[0,50],
-                                                                "filled":True,
-                                                                "billboard":False,
-                                                                "allowHover":True,
-                                                                "showNeighborOnHover":False,
-                                                                "showHighlightColor":True},
-                                                    "hidden":False,
-                                                    "textLabel":[{"field":None,
-                                                                "color":[255,255,255],
-                                                                "size":18,
-                                                                "offset":[0,0],
-                                                                "anchor":"start",
-                                                                "alignment":"center",
-                                                                "outlineWidth":0,
-                                                                "outlineColor":[255,0,0,255],
-                                                                "background":False,
-                                                                "backgroundColor":[0,0,200,255]}]},
-                                        "visualChannels":{"colorField":{"name":"tourism_index","type":"real"},
-                                                            "colorScale":"quantile",
-                                                            "strokeColorField":None,
-                                                            "strokeColorScale":"quantile",
-                                                            "sizeField":None,
-                                                            "sizeScale":"linear"}}],
-                            "effects":[],
-                            "interactionConfig":{"tooltip":{"fieldsToShow":{"AWS&ASOS":[{"name":"TIME","format":None},{"name":"STN_ID","format":None},{"name":"Longitude","format":None},{"name":"Latitude","format":None},{"name":"Name","format":None},{"name":"tourism_index","format":None}]},
-                                                            "compareMode":False,      #지정한 name와 같아야.
-                                                            "compareType":"absolute",
-                                                            "enabled":True},
-                                                    "brush":{"size":0.5,"enabled":False},"geocoder":{"enabled":True},"coordinate":{"enabled":False}, "legend": {"enabled": True}},
-                            "layerBlending":"normal",
-                            "overlayBlending":"normal",
-                            "splitMaps":[],
-                            "animationConfig":{"currentTime":None,"speed":1},
-                            "editor":{"features":[],"visible":True}},
-                "mapState":{"bearing":0,
-                            "dragRotate":False,
-                            "latitude":33.37778434808825,     #지도 중심 위도
-                            "longitude":126.57050554367405,   #지도 중심 경도
-                            "pitch":0,
-                            "zoom":9.487283904656814,         #확대 정도
-                            "isSplit":False,
-                            "isViewportSynced":True,
-                            "isZoomLocked":False,
-                            "splitMapViewports":[]},
-                "mapControls":{"layerLegend":{"show":True},"layerSelector":{"show":True},"mapLegend":{"show":True}},  #출력시, Legend가 열리게 하기. -> 작동X
-                "mapStyle":{"styleType":"light",              #안나오면 지도 스타일이 제대로 됐는지 확인.
-                            "topLayerGroups":{"road":True},
-                            "visibleLayerGroups":{"label":True,"road":True,"border":True,"building":True,"water":True,"land":True,"3d building":False},
-                            "threeDBuildingColor":[232.7874787737094,232.7874787737094,230.92517894351974],"backgroundColor":[0,0,0],"mapStyles":{}}}}
+def map_config(lat,lon):
+    config = {
+    "version": "v1",
+    "config": {
+        "visState": {
+        "filters": [],
+        "layers": [
+            {
+            "id": "l2kvqvp",
+            "type": "point",
+            "config": {
+                "dataId": "AWS&ASOS",
+                "label": "point",
+                "color": [255, 203, 153],
+                "columns": {
+                "lat": "Latitude",
+                "lng": "Longitude"
+                },
+                "isVisible":True,
+                "visConfig": {
+                "radius": 10,
+                "opacity": 0.8,
+                "colorRange": {
+                    "name": "PiYG",
+                    "type": "diverging",
+                    "category": "ColorBrewer",
+                    "colors": [
+                    "#8E0152",
+                    "#DD72AD",
+                    "#FADDED",
+                    "#E1F2CA",
+                    "#80BB47",
+                    "#276419"
+                    ]
+                }
+                },
+                "textLabel": [
+                {
+                    "color": [255, 255, 255],
+                    "size": 18
+                }
+                ]
+            },
+            "visualChannels": {
+                "colorField": {
+                "name": "tourism_index",
+                "type": "real"
+                },
+                "colorScale": "quantile",
+                "sizeField": {
+                "name": "tourism_index",
+                "type": "real"
+                },
+                "sizeScale": "sqrt"
+            }
+            }
+        ],
+        "interactionConfig": {
+            "tooltip": {
+            "fieldsToShow": {
+                "AWS&ASOS": [
+                { "name": "Name" ,"format":None},
+                { "name": "tourism_index" ,"format":None}
+                ]
+            },
+            "enabled": True
+            }
+        },
+        "layerBlending": "normal",
+        "animationConfig": {
+            "speed": 1
+        }
+        },
+        "mapState": {
+        "bearing": 0,
+        "latitude": lat,
+        "longitude": lon,
+        "pitch": 0,
+        "zoom": 9.45
+        },
+        "mapStyle": {
+        "styleType": "dark",
+        }
+    }
+    }
+
     return config

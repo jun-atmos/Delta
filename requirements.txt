@@ -4,3 +4,5 @@ matplotlib
 geopy
 moviepy
 pillow
+keplergl
+streamlit-image-comparison
