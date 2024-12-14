@@ -10,6 +10,7 @@ import matplotlib.pyplot as plt
 from datetime import datetime
 import math
 from pytz import timezone
+import streamlit as st
 
 def infrared():
     # 현재 시간에서 10분 전 시간 계산
@@ -41,7 +42,7 @@ def infrared():
             print(f"파일 다운로드 중 오류 발생: {e}")
 
     # auth_key 설정
-    auth_key = "829vQlOcRAuvb0JTnFQLrQ"
+    auth_key = st.secrets["api"]["img_key"]
 
     # URL 및 파일 경로 생성
     url = f"https://apihub.kma.go.kr/api/typ05/api/GK2A/LE1B/IR105/KO/image?date={tm2_adjusted}&authKey={auth_key}"

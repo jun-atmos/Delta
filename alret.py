@@ -8,7 +8,7 @@ import streamlit as st
 
 def alret():
     # 기본 URL 템플릿
-    api_key = st.secrets["api"]["key"]
+    api_key = st.secrets["api"]["a_key"]
     print(api_key)
     base_url = f"https://apihub.kma.go.kr/api/typ03/cgi/wrn/nph-wrn7?out=0&tmef=1&city=1&name=0&lon=126.5&lat=33.5&range=100&size=685&wrn=W,R,C,D,O,V,T,S,Y,H,&authKey={api_key}"
 
