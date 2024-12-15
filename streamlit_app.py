@@ -52,7 +52,7 @@ col1, col2 = st.columns([3, 2])
 with col1:
     tourist_spot = st.text_input("관광지 검색","한라산")
     lat,lon,address = get_location_info(tourist_spot)
-    print(lat,lon)
+    print(lat,lon,address)
 
 nearest_aws = find_nearest(lat,lon,end)
 print(nearest_aws)
@@ -64,13 +64,20 @@ with col3:
     map_1 = KeplerGl()
     map_1.config = config
     map_1.add_data(data=end, name='AWS&ASOS')
+    location_data = pd.DataFrame({
+    'latitude': [lat],
+    'longitude': [lon],
+    'address': [address],
+    'icon kepler.gl': ['place']  # Kepler.gl 아이콘 레이어 활성화
+    })
+    map_1.add_data(data=location_data, name='LOC')
 
     html_path = 'kepler_map.html'
     map_1.save_to_html(file_name=html_path)
     with open(html_path, 'r', encoding='utf-8') as f:
         kepler_html = f.read()
     st.components.v1.html(kepler_html, height=600)
-    st.text("📢 원의 크기가 크고 초록색일수록 관광하기 좋은곳 입니다")
+    st.text("📢 원의 크기가 크고 초록색일수록 관광하기 좋은곳 입니다, 검색 위치는 민트색 📍아이콘으로 표시됩니다.")
 
 with col4:
     st.header("🌥️ 검색 지역 날씨 정보 🌥️", divider="red")

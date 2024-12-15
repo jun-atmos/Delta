@@ -10,7 +10,7 @@ def map_config(lat,lon):
             "type": "point",
             "config": {
                 "dataId": "AWS&ASOS",
-                "label": "point",
+                "label": "관측 지점",
                 "color": [255, 203, 153],
                 "columns": {
                 "lat": "Latitude",
@@ -41,6 +41,7 @@ def map_config(lat,lon):
                 }
                 ]
             },
+
             "visualChannels": {
                 "colorField": {
                 "name": "tourism_index",
@@ -53,6 +54,24 @@ def map_config(lat,lon):
                 },
                 "sizeScale": "sqrt"
             }
+            },
+            {
+            "id": "icon_layer",
+            "type": "icon",
+            "config": {
+                "dataId": "LOC",
+                "label": "현 위치",
+                "color": [0, 255, 255],
+                "columns": {
+                    "lat": "latitude",
+                    "lng": "longitude",
+                    "icon": "icon kepler.gl"
+                }, 
+                "isVisible":True,
+                "visConfig": {
+                "radius": 50,
+                },
+            }
             }
         ],
         "interactionConfig": {
@@ -61,6 +80,9 @@ def map_config(lat,lon):
                 "AWS&ASOS": [
                 { "name": "Name" ,"format":None},
                 { "name": "tourism_index" ,"format":None}
+                ],
+                "LOC": [
+                { "name": "address" ,"format":None},
                 ]
             },
             "enabled": True
