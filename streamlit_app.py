@@ -7,6 +7,7 @@ from map_config import *
 from alret import *
 from infrared import *
 from find_nearest import *
+from nearest_tour import *
 
 import streamlit as st
 from streamlit_image_comparison import image_comparison
@@ -69,7 +70,7 @@ with col3:
     with open(html_path, 'r', encoding='utf-8') as f:
         kepler_html = f.read()
     st.components.v1.html(kepler_html, height=600)
-
+    st.text("📢 원의 크기가 크고 초록색일수록 관광하기 좋은곳 입니다")
 
 with col4:
     st.header("🌥️ 검색 지역 날씨 정보 🌥️", divider="red")
@@ -86,19 +87,40 @@ with col4:
     col9.metric("15분 강수량", f"{total_api[total_api['STN_ID'].isin([nearest_aws['STN_ID']])]['RN-15m'].iloc[0]}mm",border=True)
     col10.metric("습도", f"{total_api[total_api['STN_ID'].isin([nearest_aws['STN_ID']])]['HM'].iloc[0]}%",border=True)
 
+slider1, reco1 = st.columns(2)
+st.header("관광지 추천 ", divider="red")
+with slider1:
+    st.header("관광지 추천 범위 선택", divider="red")
+    range_sel = st.select_slider(
+        "관광지 추천 범위 선택",
+        options=[
+            2,
+            5,
+            10,
+            20,
+            50,
+        ],
+    )
+    st.subheader(f"선택하신 관광지 추천 범위는 근처 {range_sel} km 입니다")
+with reco1:
+    st.header("관광지 추천 🏝️", divider="red")
+    tourism_within_dis = find_nearest_tour(lat, lon, range_sel, end)
+    print(tourism_within_dis)
+    tourism_within_dis.set_index("rank", inplace=True)
 
+    columns_to_exclude = ['Latitude', 'Longitude']
+    filtered_data = tourism_within_dis.drop(columns=columns_to_exclude, errors='ignore')
 
+    # config 설정
+    config = {
+        "_index": st.column_config.NumberColumn("추천 관광지 등수"),
+        "name": "관광지 이름",
+        "Distance": st.column_config.NumberColumn("추천 관광지 거리 (km)"),
+        "nearest_tourism_index": st.column_config.NumberColumn("추천 관광지 추천 점수"),
+    }
 
-
-
-
-
-
-
-
-
-
-
+    # 수정된 데이터프레임 출력
+    st.dataframe(filtered_data, column_config=config,use_container_width=True)
 
 col11, col12 = st.columns(2)
 with col11:
