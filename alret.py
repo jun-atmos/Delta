@@ -10,13 +10,13 @@ def alret():
     # 기본 URL 템플릿
     api_key = st.secrets["api"]["a_key"]
     print(api_key)
-    base_url = f"https://apihub.kma.go.kr/api/typ03/cgi/wrn/nph-wrn7?out=0&tmef=1&city=1&name=0&lon=126.5&lat=33.5&range=100&size=685&wrn=W,R,C,D,O,V,T,S,Y,H,&authKey={api_key}"
-
+    base_url = "https://apihub.kma.go.kr/api/typ03/cgi/wrn/nph-wrn7?out=0&tmef=1&city=1&name=0&lon=126.5&lat=33.5&range=100&tm={date}&size=685&wrn=W,R,C,D,O,V,T,S,Y,H,&authKey={api_key}"
     # 현재 시간을 한국 표준시(KST)로 변환
     utc_time = datetime.utcnow()  # UTC 시간 가져오기
     current_time = utc_time + timedelta(hours=9)  # UTC + 9시간 = 한국 표준시
     formatted_date = current_time.strftime("%Y%m%d%H%M")  # API에 맞는 날짜 포맷
-    updated_url = base_url.format(date=formatted_date)
+    updated_url = base_url.format(date=formatted_date,api_key = api_key)
+
 
     print(f"Requesting data for: {formatted_date} (KST)")
     print(updated_url)  # 생성된 URL 출력
