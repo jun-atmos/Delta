@@ -57,6 +57,10 @@ with col1:
 nearest_aws = find_nearest(lat,lon,end)
 print(nearest_aws)
 
+with col2:
+     st.text("✏️자세한 홈페이지 이용방법은 맨 아래 홈페이지 설명서를 참고 부탁드립니다.")
+     st.text("✏️강릉원주대학교 대기환경과학과 DELTA_TEAM 프로젝트입니다. 코드는 github에서 확인 가능합니다.")
+
 col3, col4 = st.columns([3, 2])
 
 with col3:
@@ -80,7 +84,7 @@ with col3:
     st.text("📢 원의 크기가 크고 초록색일수록 관광하기 좋은곳 입니다, 검색 위치는 민트색 📍아이콘으로 표시됩니다.")
 
 with col4:
-    st.header("🌥️ 검색 지역 날씨 정보 🌥️", divider="red")
+    st.header(" 검색 지역 날씨 정보 🌥️", divider="red")
     tour_name,tour_dis = st.columns(2)
     tour_name.metric("근처 관측 지점명", f"{nearest_aws['Name']}",border=True,)
     tour_dis.metric("떨어진 거리",f"{round(nearest_aws['Distance'],3)} km", border=True,)
@@ -145,3 +149,39 @@ with col12:
         with st.spinner('새로운 적외 위성 영상을 가져오는 중....☁️'):
             infrared()
         st.image("infrared.jpg",caption="적외위성영상")
+
+with st.expander("홈페이지 설명서"):
+    tab1, tab2, tab3 = st.tabs(["지도 사용 방법", "적외 위성 분석법", "관광지수 알고리즘 설명"])
+
+    with tab1:
+        st.header("홈페이지 사용 방법")
+        st.text("내가 가려는 관광지가 날씨가 안좋아서 여행을 망치면 어떡하지? 라는 생각 해보셨나요?")
+        st.text("내가 가려는 관광지에 대한 날씨 정보 및 제주도에서 여행하기 좋은지 안 좋은지 알려드립니다.")
+        st.text("내가 가려는 관광지가 여행하기 좋지 않다면 근처 관광지 추천도 받아보세요!")
+
+        st.subheader("홈페이지 이용 주의 사항")
+        st.text("관광지의 실시간 날씨 정보를 이용하는 것이 아닌 근처 날씨 관측 지점의 정보를 이용합니다. 관광지와 관측지점이 많이 떨어져 있으면 홈페이지 결과와 다를 수 있습니다.")
+        st.text("10분마다 초단기 예보가 업데이트됩니다. 초단기 예보를 가져올 때 오래 걸릴 수 있습니다.")
+
+        st.subheader("지도 사용 방법")
+        st.text("원의 크기가 크고 초록색일수록 관광하기 좋은 곳 입니다.")
+        st.text("지도 위에 있는 검색창에 가려 하는 관광지를 입력합니다.")
+        st.text("민트색 📍아이콘으로 검색한 관광지의 위치가 표시가 됩니다.")
+        st.image("map.png", width=700)
+        st.subheader("관광지 추천 사용 방법")
+        st.text("관광지 추천 범위를 선택해 주세요.")
+        st.text("아래 있는 슬라이드 바로 선택 가능합니다.")
+        st.text("선택하면 검색한 관광지에서 선택 범위 안에 있는 관광지를 추천드립니다.")
+        st.image("reco.png", width=700)
+    with tab2:
+        st.header("적외 위성 분석법")
+        st.image("inf_sol.png", width=700,caption="출처 : 국가위성센터")
+        st.subheader("적외 위성 사진에서")
+        st.text("고도가 높은 구름 : 밝게 보인다.")
+        st.text("고도가 낮은 구름 : 어둡게 보인다.")
+    with tab3:
+        st.header("관광지수 알고리즘 설명")
+        st.subheader("관광지수 산출")
+        st.image("tour_cal_1.png", width=700)
+        st.subheader("시정점수 포함을 위한 알고리즘")
+        st.image("tour_cal_2.png", width=700)

@@ -6,6 +6,24 @@ def map_config(lat,lon):
         "filters": [],
         "layers": [
             {
+            "id": "icon_layer",
+            "type": "icon",
+            "config": {
+                "dataId": "LOC",
+                "label": "현 위치",
+                "color": [0, 255, 255],
+                "columns": {
+                    "lat": "latitude",
+                    "lng": "longitude",
+                    "icon": "icon kepler.gl"
+                }, 
+                "isVisible":True,
+                "visConfig": {
+                "radius": 50,
+                },
+            }
+            },
+            {
             "id": "l2kvqvp",
             "type": "point",
             "config": {
@@ -53,24 +71,6 @@ def map_config(lat,lon):
                 "type": "real"
                 },
                 "sizeScale": "sqrt"
-            }
-            },
-            {
-            "id": "icon_layer",
-            "type": "icon",
-            "config": {
-                "dataId": "LOC",
-                "label": "현 위치",
-                "color": [0, 255, 255],
-                "columns": {
-                    "lat": "latitude",
-                    "lng": "longitude",
-                    "icon": "icon kepler.gl"
-                }, 
-                "isVisible":True,
-                "visConfig": {
-                "radius": 50,
-                },
             }
             }
         ],
