@@ -96,6 +96,9 @@ def map_data_pro(tm2,jeju_aws):
     total = filled_data.merge(calculation_scores(filled_data), on=["TIME",'STN_ID'], how="outer")
 
     end = total[['TIME', 'STN_ID', 'Longitude', 'Latitude', 'Name', 'tourism_index']]
+    col_min = end['tourism_index'].min()
+    col_max = end['tourism_index'].max()
+    end['tourism_index'] = (end['tourism_index'] - col_min) / (col_max - col_min) * 100
     end['tourism_index'] = end['tourism_index'].round(3)    #반올림
     end['TIME'] = end['TIME'].astype(str)
     return end, total_api
