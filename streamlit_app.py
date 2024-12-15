@@ -88,7 +88,6 @@ with col4:
     col10.metric("습도", f"{total_api[total_api['STN_ID'].isin([nearest_aws['STN_ID']])]['HM'].iloc[0]}%",border=True)
 
 slider1, reco1 = st.columns(2)
-st.header("관광지 추천 ", divider="red")
 with slider1:
     st.header("관광지 추천 범위 선택", divider="red")
     range_sel = st.select_slider(
